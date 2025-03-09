@@ -13,3 +13,7 @@ Receta de cocina sobre [arroz con leche](https://html-preview.github.io/?url=htt
 ## Juego del ahorcado
 Pequeño ejemplo de [juego del ahorcado](https://html-preview.github.io/?url=https://raw.githubusercontent.com/alfamirio/redes-informatica2/refs/heads/main/ejercicios/juego-ahorcado/juego_ahorcado.html)
 
+## Cartelera de peliculas
+Se incluyen dos modelos de la cartelera de peliculas
+1. [Cartelera simple](https://html-preview.github.io/?url=https://raw.githubusercontent.com/alfamirio/redes-informatica2/refs/heads/main/ejercicios/cartelera-peliculas/cartelera-peliculas.html)
+2. [Cartelera visual (steam Style)](https://html-preview.github.io/?url=https://raw.githubusercontent.com/alfamirio/redes-informatica2/refs/heads/main/ejercicios/cartelera-peliculas/cartelera-peliculas-visual.html)

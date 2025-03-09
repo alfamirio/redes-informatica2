@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Top 100 Películas</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        img {
+            width: 100px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Top 100 Películas</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Rango</th>
+                <th>Título</th>
+                <th>Año</th>
+                <th>Género</th>
+                <th>Calificación</th>
+                <th>Imagen</th>
+            </tr>
+        </thead>
+        <tbody id="movies-table">
+            <!-- Las filas de películas se insertarán aquí -->
+        </tbody>
+    </table>
+
+    <script>
+        // URL del archivo JSON
+        const jsonUrl = 'https://raw.githubusercontent.com/alfamirio/redes-informatica2/refs/heads/main/data/movies-top100-repo3.json';
+
+        // Función para cargar y procesar el JSON
+        async function loadMovies() {
+            try {
+                const response = await fetch(jsonUrl);
+                const movies = await response.json();
+                const tableBody = document.getElementById('movies-table');
+
+                movies.forEach(movie => {
+                    const row = document.createElement('tr');
+
+                    // Crear celdas para cada dato
+                    const rankCell = document.createElement('td');
+                    rankCell.textContent = movie.rank;
+                    row.appendChild(rankCell);
+
+                    const titleCell = document.createElement('td');
+                    titleCell.textContent = movie.title;
+                    row.appendChild(titleCell);
+
+                    const yearCell = document.createElement('td');
+                    yearCell.textContent = movie.year;
+                    row.appendChild(yearCell);
+
+                    const genreCell = document.createElement('td');
+                    genreCell.textContent = movie.genre;
+                    row.appendChild(genreCell);
+
+                    const ratingCell = document.createElement('td');
+                    ratingCell.textContent = movie.rating;
+                    row.appendChild(ratingCell);
+
+                    const imageCell = document.createElement('td');
+                    const link = document.createElement('a');
+                    link.href = movie.imdb_link;
+                    link.target = '_blank'; // Abrir en una nueva pestaña
+                    const image = document.createElement('img');
+                    image.src = movie.image;
+                    image.alt = movie.title;
+                    link.appendChild(image);
+                    imageCell.appendChild(link);
+                    row.appendChild(imageCell);
+
+                    // Añadir la fila a la tabla
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error al cargar el JSON:', error);
+            }
+        }
+
+        // Llamar a la función para cargar las películas
+        loadMovies();
+    </script>
+</body>
+</html>
+

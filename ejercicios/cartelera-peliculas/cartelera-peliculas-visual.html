@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 100 Movies</title>
+    <style>
+        .movie-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+        }
+        .movie-container img {
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Top 100 Movies</h1>
+    <div class="movie-container" id="movieContainer">
+        <!-- Las películas se cargarán aquí mediante JavaScript -->
+    </div>
+
+    <script>
+        // URL del archivo JSON
+        const jsonUrl = "https://raw.githubusercontent.com/alfamirio/redes-informatica2/refs/heads/main/data/movies-top100-repo3.json";
+        
+        // Función para cargar el JSON y mostrar las películas
+        async function cargarPeliculas() {
+            try {
+                // Obtiene los datos del JSON
+                const response = await fetch(jsonUrl);
+                const peliculas = await response.json();
+
+                // Referencia al contenedor donde se van a agregar las imágenes
+                const contenedor = document.getElementById('movieContainer');
+
+                // Itera sobre las películas y crea una imagen para cada una
+                peliculas.forEach(pelicula => {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = pelicula.image;
+                    imgElement.alt = pelicula.title;
+                    imgElement.title = pelicula.title;
+
+                    // Crea un enlace para cada imagen
+                    const enlace = document.createElement('a');
+                    enlace.href = pelicula.imdb_link;
+                    enlace.target = "_blank";
+
+                    // Añade la imagen al enlace
+                    enlace.appendChild(imgElement);
+
+                    // Añade el enlace al contenedor
+                    contenedor.appendChild(enlace);
+                });
+            } catch (error) {
+                console.error("Error al cargar las películas:", error);
+            }
+        }
+
+        // Llama a la función para cargar las películas cuando la página se cargue
+        window.onload = cargarPeliculas;
+    </script>
+</body>
+</html>
+
