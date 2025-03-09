@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahorcado</title>
+
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        input { font-size: 18px; padding: 5px; }
+        button { margin: 5px; padding: 10px; font-size: 18px; }
+    </style>
+
+    <script>
+        const palabras = ["ELEFANTE", "JIRAFA", "ORDENADOR", "GUITARRA", "PROGRAMACION"];
+        var palabra, oculta, intentos;
+
+        function iniciarJuego() {
+            palabra = palabras[Math.floor(Math.random() * palabras.length)];
+            oculta = "_".repeat(palabra.length);
+            intentos = 6;
+            document.getElementById("palabra").textContent = oculta.split("").join(" ");
+            document.getElementById("mensaje").textContent = "";
+            document.getElementById("intentos").textContent = intentos;
+            document.getElementById("letra").value = "";
+            document.getElementById("letra").disabled = false;
+        }
+
+        function probarLetra() {
+            let letra = document.getElementById("letra").value.toUpperCase();
+            if (!letra || letra.length !== 1) return;
+            document.getElementById("letra").value = "";
+
+            if (palabra.includes(letra)) {
+                oculta = oculta.split("").map((c, i) => palabra[i] === letra ? letra : c).join("");
+                document.getElementById("palabra").textContent = oculta.split("").join(" ");
+            } else {
+                intentos--;
+                document.getElementById("intentos").textContent = intentos;
+            }
+
+            verificarEstado();
+        }
+
+        function verificarEstado() {
+            if (!oculta.includes("_")) {
+                document.getElementById("mensaje").textContent = "¡Ganaste!";
+                document.getElementById("letra").disabled = true;
+            } else if (intentos === 0) {
+                document.getElementById("mensaje").textContent = `Perdiste. La palabra era: ${palabra}`;
+                document.getElementById("letra").disabled = true;
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", iniciarJuego);
+    </script>
+
+</head>
+<body>
+
+    <h1>Juego del Ahorcado</h1>
+    <p id="palabra"></p>
+    <p>Intentos restantes: <span id="intentos">6</span></p>
+    <input type="text" id="letra" maxlength="1">
+    <button onclick="probarLetra()">Probar letra</button>
+    <p id="mensaje"></p>
+    <button onclick="iniciarJuego()">Reiniciar</button>
+
+</body>
+</html>
+
