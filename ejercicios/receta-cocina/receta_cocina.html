@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Mis recetas de cocina</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+    text-align: center;
+}
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+img {
+    width: 100%;
+    border-radius: 10px;
+}
+h1 {
+    color: #444;
+}
+ul, ol {
+    text-align: left;
+    padding-left: 20px;
+}
+.converter {
+    margin-top: 20px;
+    padding: 15px;
+    background: #eee;
+    border-radius: 8px;
+}
+input, select, button {
+    padding: 8px;
+    margin: 5px;
+    font-size: 16px;
+}
+</style>
+
+<script>
+window.onload = function() {
+
+};
+
+
+function convertir() {
+    let gr = document.getElementById("grInput").value;
+    let ingrediente = document.getElementById("ingredient").value;
+    let ml = 0;
+
+    // Densidades aproximadas en g/ml
+    const densidades = {
+        leche: 1.03,   // 1 ml de leche ≈ 1.03 gr
+        azucar: 0.85,  // 1 ml de azúcar ≈ 0.85 gr
+        arroz: 0.78    // 1 ml de arroz ≈ 0.78 gr
+    };
+
+    if (gr && gr > 0) {
+        ml = gr / densidades[ingrediente];
+        document.getElementById("resultado").innerHTML = 
+            `${gr} gr de ${ingrediente} ≈ ${ml.toFixed(0)} ml`;
+    } else {
+        document.getElementById("resultado").innerHTML = "Introduce un valor válido.";
+    }
+}
+</script>
+
+</head>
+<body>
+
+    <div class="container">
+        <h1>Receta de Arroz con Leche</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Arroz_con_leche.png" alt="Arroz con leche">
+        
+        <h2>Ingredientes:</h2>
+        <ul>
+            <li>1 litro de leche</li>
+            <li>200g de arroz</li>
+            <li>100g de azúcar</li>
+            <li>1 rama de canela</li>
+            <li>Cáscara de limón</li>
+            <li>Canela en polvo (para decorar)</li>
+        </ul>
+
+        <h2>Preparación:</h2>
+        <ol>
+            <li>Poner la leche a calentar con la cáscara de limón y la rama de canela.</li>
+            <li>Cuando empiece a hervir, añadir el arroz y cocinar a fuego lento.</li>
+            <li>Remover constantemente durante unos 30-40 minutos.</li>
+            <li>Agregar el azúcar y mezclar bien.</li>
+            <li>Retirar del fuego y dejar enfriar.</li>
+            <li>Servir en cuencos y espolvorear con canela en polvo.</li>
+        </ol>
+
+        <p>¡Disfruta de este delicioso postre casero!</p>
+
+
+        <div class="converter">
+            <h2>Conversor de gr a ml</h2>
+            <p id="resultado"></p>
+            <label for="grInput">Cantidad en gr:</label>
+            <input type="number" id="grInput" placeholder="Introduce gr">
+            
+            <label for="ingredient">Ingrediente:</label>
+            <select id="ingredient">
+                <option value="azucar">Azúcar</option>
+                <option value="arroz">Arroz</option>
+                <option value="leche">Leche</option>
+            </select>
+            
+            <button onclick="convertir()">Convertir</button>
+        </div>
+
+    </div>
+
+
+</body>
+</html>
